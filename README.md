@@ -5,7 +5,7 @@
 This vite template purpose is to save time, shadcn is already configured, if you want to re-config, delete `components.json`, `components.json` and `/lib` first
 then type following command into your terminal: `npx shadcn-ui@latest init`
 
-More Information can be found here:  ![Vite shadcn/ui]("https://ui.shadcn.com/docs/installation/vite")
+More Information can be found here:  [Vite shadcn/ui]("https://ui.shadcn.com/docs/installation/vite")
 
 ---
 
