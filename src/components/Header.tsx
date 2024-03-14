@@ -4,11 +4,11 @@ import { ModeToggle } from './ui/mode-toggle'
 export const Header = () => {
     return (
         <>
-            <h1 className="text-2xl m-4">Webtoon-Atlas</h1>
-            <Nav />
-            <div className='flex justify-end m-4'>
+            <div className="flex justify-between m-4">
+                <h1 className="text-2xl">Webtoon-Atlas</h1>
                 <ModeToggle />
             </div>
+            <Nav />
         </>
     )
 }
