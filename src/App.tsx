@@ -1,13 +1,16 @@
-import { Outlet } from "react-router-dom"
-import { Header } from "./components/Header"
+import { Outlet } from 'react-router-dom'
+import { Header } from './components/Header'
+import { ThemeProvider } from './components/ui/theme-provider'
 
 function App() {
     return (
         <>
-            <Header />
-            <main className="m-5">
-                <Outlet />
-            </main>
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+                <Header />
+                <main className="m-5">
+                    <Outlet />
+                </main>
+            </ThemeProvider>
         </>
     )
 }
