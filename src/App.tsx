@@ -5,7 +5,7 @@ function App() {
     return (
         <>
             <Header />
-            <main>
+            <main className="m-5">
                 <Outlet />
             </main>
         </>
