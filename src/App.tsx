@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { Header } from './components/Header'
+import { Header } from './components/custom/Header'
 import { ThemeProvider } from './components/ui/theme-provider'
 
 function App() {
