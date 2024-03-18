@@ -6,7 +6,7 @@ function App() {
     return (
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-                <Header />
+                <Header> </Header>
                 <main className="m-5">
                     <Outlet />
                 </main>
