@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { fetchSingleEndpoint } from '../utils'
 
 type authorsType = {
@@ -39,4 +39,11 @@ export const WebtoonProvider: React.FC<ProviderProps> = ({ children }) => {
             {children}
         </WebtoonContext.Provider>
     )
+}
+export const useAppContext = () => {
+    const context = useContext(WebtoonContext)
+    if (!context) {
+        throw new Error('useAppContext must be used within an Context Provider')
+    }
+    return context
 }
