@@ -1,7 +1,18 @@
+import { useAppContext } from '@/lib/contexts/WebToonContext'
+
 export const PageHome = () => {
+    const { authors } = useAppContext()
     return (
         <>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati officia molestiae atque quas nisi tenetur qui neque officiis illo! Facilis quam maxime, provident quo amet eius distinctio repudiandae odit iste, odio delectus eveniet id pariatur. Cumque consequatur recusandae optio quo. Earum laborum magni deleniti optio, maxime praesentium eos similique deserunt.</p>
+            <section>
+                {authors.map((author) => (
+                    <>
+                        <li>Name: {author.name}</li>
+                        <li>Location: {author.location}</li>
+                        <li>Description: {author.description}</li>
+                    </>
+                ))}
+            </section>
         </>
     )
 }
