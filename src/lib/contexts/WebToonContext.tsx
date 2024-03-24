@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { fetchSingleEndpoint } from '../utils'
+import { z } from 'zod'
 
 type authorsType = {
     name: string
@@ -20,13 +21,29 @@ type ProviderProps = {
     children: React.ReactNode
 }
 
+const authorSchema = z.array(
+    z.object({
+        name: z.string(),
+        location: z.string(),
+        description: z.string(),
+    })
+)
+
 export const WebtoonContext = createContext<webtoonTypes>(contextData)
 
 export const WebtoonProvider: React.FC<ProviderProps> = ({ children }) => {
     const [authors, setAuthors] = useState<authorsType[]>([])
 
     useEffect(() => {
-        fetchSingleEndpoint('authors').then((data) => setAuthors(data))
+        fetchSingleEndpoint('authors').then((data) => {
+            const validatedData = authorSchema.safeParse(data)
+            if (!validatedData.success) {
+                console.error(validatedData.error)
+                return
+            }
+            console.log(validatedData.data)
+            setAuthors(validatedData.data)
+        })
     }, [])
 
     const contextValue: webtoonTypes = {
