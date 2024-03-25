@@ -8,6 +8,8 @@ const profileSchema = z.object({
 
 const authorSchema = z.array(profileSchema)
 
+const artistsSchema = z.array(profileSchema)
+
 const publishersSchema = z.array(
     profileSchema.extend({
         type: z.array(z.string()),
@@ -16,6 +18,7 @@ const publishersSchema = z.array(
 
 type authorsType = z.infer<typeof authorSchema>
 type publishersType = z.infer<typeof publishersSchema>
+type artistsType = z.infer<typeof artistsSchema>
 
-export { authorSchema, publishersSchema }
-export type { authorsType, publishersType }
+export { authorSchema, publishersSchema, artistsSchema }
+export type { authorsType, publishersType, artistsType }

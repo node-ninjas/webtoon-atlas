@@ -29,6 +29,9 @@ export const fetchSingleEndpoint = async <T>(
 
         return validatedData.data
     } catch (e: any) {
+        if (e.response && e.response.status === 404) {
+            throw new Error('404: The requested resource was not found')
+        }
         throw new Error(e)
     }
 }

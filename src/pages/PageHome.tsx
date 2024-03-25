@@ -1,7 +1,7 @@
 import { useAppContext } from '@/lib/contexts/WebToonContext'
 
 export const PageHome = () => {
-    const { authors, publishers } = useAppContext()
+    const { authors, publishers, artists } = useAppContext()
     return (
         <section>
             {authors.map((author) => (
@@ -16,6 +16,13 @@ export const PageHome = () => {
                     <li>Name: {publisher.name}</li>
                     <li>Location: {publisher.location}</li>
                     <li>Description: {publisher.description}</li>
+                </ul>
+            ))}
+            {artists.map((artist) => (
+                <ul key={artist.name}>
+                    <li>Name: {artist.name}</li>
+                    <li>Location: {artist.location}</li>
+                    <li>Description: {artist.description}</li>
                 </ul>
             ))}
         </section>
