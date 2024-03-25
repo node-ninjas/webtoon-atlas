@@ -1,14 +1,22 @@
 import { z } from 'zod'
 
-const authorSchema = z.array(
+const ProfileSchema = z.object({
+    name: z.string(),
+    location: z.string(),
+    description: z.string(),
+})
+
+const authorSchema = z.array(ProfileSchema)
+
+const publisherSchema = z.array(
     z.object({
-        name: z.string(),
-        location: z.string(),
-        description: z.string(),
+        ProfileSchema,
+        type: z.array(z.string()),
     })
 )
 
 type authorsType = z.infer<typeof authorSchema>
+type publisherType = z.infer<typeof publisherSchema>
 
-export { authorSchema }
-export type { authorsType }
+export { authorSchema, publisherSchema }
+export type { authorsType, publisherType }
