@@ -1,16 +1,15 @@
 import { z } from 'zod'
 
-const ProfileSchema = z.object({
+const profileSchema = z.object({
     name: z.string(),
     location: z.string(),
     description: z.string(),
 })
 
-const authorSchema = z.array(ProfileSchema)
+const authorSchema = z.array(profileSchema)
 
 const publishersSchema = z.array(
-    z.object({
-        ProfileSchema,
+    profileSchema.extend({
         type: z.array(z.string()),
     })
 )
