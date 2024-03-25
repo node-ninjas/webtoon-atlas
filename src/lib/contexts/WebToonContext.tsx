@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { fetchSingleEndpoint } from '../utils'
-import { z } from 'zod'
+import { authorSchema } from '../types'
 
 type authorsType = {
     name: string
@@ -20,14 +20,6 @@ export const contextData: webtoonTypes = {
 type ProviderProps = {
     children: React.ReactNode
 }
-
-const authorSchema = z.array(
-    z.object({
-        name: z.string(),
-        location: z.string(),
-        description: z.string(),
-    })
-)
 
 export const WebtoonContext = createContext<webtoonTypes>(contextData)
 
