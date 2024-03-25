@@ -1,15 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { fetchSingleEndpoint } from '../utils'
-import { authorSchema } from '../types'
+import { authorSchema, authorsType } from '../types'
 
-type authorsType = {
-    name: string
-    location: string
-    description: string
-}
 type webtoonTypes = {
-    authors: authorsType[]
-    setAuthors: React.Dispatch<React.SetStateAction<authorsType[]>>
+    authors: authorsType
+    setAuthors: React.Dispatch<React.SetStateAction<authorsType>>
 }
 
 export const contextData: webtoonTypes = {
@@ -24,7 +19,7 @@ type ProviderProps = {
 export const WebtoonContext = createContext<webtoonTypes>(contextData)
 
 export const WebtoonProvider: React.FC<ProviderProps> = ({ children }) => {
-    const [authors, setAuthors] = useState<authorsType[]>([])
+    const [authors, setAuthors] = useState<authorsType>([])
 
     useEffect(() => {
         fetchSingleEndpoint('authors').then((data) => {
