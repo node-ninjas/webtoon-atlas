@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { ZodSchema } from 'zod'
 import axios from 'axios'
 
 export function cn(...inputs: ClassValue[]) {
@@ -8,7 +9,10 @@ export function cn(...inputs: ClassValue[]) {
 
 export const URL = 'localhost:3550'
 
-export const fetchSingleEndpoint = async (endpoint: string) => {
+export const fetchSingleEndpoint = async <T>(
+    endpoint: string,
+    schema: ZodSchema<T>
+): Promise<T> => {
     if (!endpoint) {
         throw new Error('Please enter a correct URL with a endpoint')
     }
@@ -16,7 +20,14 @@ export const fetchSingleEndpoint = async (endpoint: string) => {
         const response = await axios.get(`http://${URL}/${endpoint}`)
         const data = response.data
         console.log(data)
-        return data
+
+        const validatedData = schema.safeParse(data)
+
+        if (!validatedData.success) {
+            throw new Error(JSON.stringify(validatedData.error))
+        }
+
+        return validatedData.data
     } catch (e: any) {
         throw new Error(e)
     }

@@ -22,15 +22,9 @@ export const WebtoonProvider: React.FC<ProviderProps> = ({ children }) => {
     const [authors, setAuthors] = useState<authorsType>([])
 
     useEffect(() => {
-        fetchSingleEndpoint('authors').then((data) => {
-            const validatedData = authorSchema.safeParse(data)
-            if (!validatedData.success) {
-                console.error(validatedData.error)
-                return
-            }
-            console.log(validatedData.data)
-            setAuthors(validatedData.data)
-        })
+        fetchSingleEndpoint('authors', authorSchema).then((data) =>
+            setAuthors(data)
+        )
     }, [])
 
     const contextValue: webtoonTypes = {
