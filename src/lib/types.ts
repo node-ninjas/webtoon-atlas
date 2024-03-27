@@ -66,6 +66,7 @@ const webtoonSchema = z.object({
 type authorsType = z.infer<typeof authorSchema>
 type publishersType = z.infer<typeof publishersSchema>
 type artistsType = z.infer<typeof artistsSchema>
+type webtoonType = z.infer<typeof webtoonSchema>
 
-export { authorSchema, publishersSchema, artistsSchema }
-export type { authorsType, publishersType, artistsType }
+export { authorSchema, publishersSchema, artistsSchema, webtoonSchema }
+export type { authorsType, publishersType, artistsType, webtoonType }
