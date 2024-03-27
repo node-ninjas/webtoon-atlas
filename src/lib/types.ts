@@ -44,9 +44,9 @@ const sizeSchema = z.object({
 
 const webtoonSchema = z.object({
     titles: z.array(titleSchema),
-    authors: z.array(authorSchema),
-    artists: z.array(artistsSchema),
-    publishers: z.array(publishersSchema),
+    authors: authorSchema,
+    artists: artistsSchema,
+    publishers: publishersSchema,
     status: z.string(z.enum(statusArray)),
     chapters: z.number().max(1000),
     type: z.string(z.enum(typeArray)),
@@ -63,10 +63,19 @@ const webtoonSchema = z.object({
     ageRecommendation: z.number().nonnegative().min(0).max(20),
 })
 
+const webtoonsSchema = z.array(webtoonSchema)
+
 type authorsType = z.infer<typeof authorSchema>
 type publishersType = z.infer<typeof publishersSchema>
 type artistsType = z.infer<typeof artistsSchema>
 type webtoonType = z.infer<typeof webtoonSchema>
+type webtoonsType = z.infer<typeof webtoonsSchema>
 
-export { authorSchema, publishersSchema, artistsSchema, webtoonSchema }
-export type { authorsType, publishersType, artistsType, webtoonType }
+export { authorSchema, publishersSchema, artistsSchema, webtoonsSchema }
+export type {
+    authorsType,
+    publishersType,
+    artistsType,
+    webtoonType,
+    webtoonsType,
+}

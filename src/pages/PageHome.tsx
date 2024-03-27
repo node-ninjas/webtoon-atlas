@@ -1,10 +1,13 @@
-import { useAppContext } from '@/lib/contexts/WebToonContext'
+// import { useAppContext } from '@/lib/contexts/WebToonContext'
+import { Webtoons } from '@/components/custom/Webtoons'
 
 export const PageHome = () => {
-    const { authors, publishers, artists } = useAppContext()
+    // const { authors, publishers, artists } = useAppContext()
     return (
         <section>
-            {authors.map((author) => (
+            <h1>Webtoons</h1>
+            <Webtoons />
+            {/* {authors.map((author) => (
                 <ul key={author.name}>
                     <li>Name: {author.name}</li>
                     <li>Location: {author.location}</li>
@@ -24,7 +27,7 @@ export const PageHome = () => {
                     <li>Location: {artist.location}</li>
                     <li>Description: {artist.description}</li>
                 </ul>
-            ))}
+            ))} */}
         </section>
     )
 }
