@@ -16,6 +16,62 @@ const publishersSchema = z.array(
     })
 )
 
+const languageArray = ['German', 'Korean', 'Chinese', 'English'] as const
+
+const titleSchema = z.object({
+    name: z.string(),
+    language: z.string(z.enum(languageArray)),
+})
+
+const currencySymbolArray = ['€', '$', '₩'] as const
+
+const priceValueRegex = /^\d+,\d{2}$/
+const priceSchema = z.object({
+    value: z.string().regex(priceValueRegex),
+    currency: z.string(z.enum(currencySymbolArray)),
+})
+
+const positiveNumberSchema = z.number().positive()
+
+const sizeSchema = z.object({
+    length: positiveNumberSchema,
+    height: positiveNumberSchema,
+    width: positiveNumberSchema,
+})
+
+const statusArray = [
+    'finished',
+    'running',
+    'onHiatus',
+    'aborted',
+    'announced',
+] as const
+
+const typeArray = ['manhwa', 'manhua', 'webtoon'] as const
+
+const isbnRegex = /^\d{13}$/
+
+const webtoonSchema = z.object({
+    titles: z.array(titleSchema),
+    authors: z.array(authorSchema),
+    artists: z.array(artistsSchema),
+    publishers: z.array(publishersSchema),
+    status: z.string(z.enum(statusArray)),
+    chapters: z.number().max(1000),
+    type: z.string(z.enum(typeArray)),
+    genres: z.array(z.string()),
+    volume: z.number(),
+    price: z.array(priceSchema),
+    pages: z.number(),
+    size: sizeSchema,
+    isbn: z.string().regex(isbnRegex),
+    translator: z.string(),
+    description: z
+        .string()
+        .max(80, 'The Description cannot be longer than 80 characters'),
+    ageRecommendation: z.number().nonnegative().min(0).max(20),
+})
+
 type authorsType = z.infer<typeof authorSchema>
 type publishersType = z.infer<typeof publishersSchema>
 type artistsType = z.infer<typeof artistsSchema>
