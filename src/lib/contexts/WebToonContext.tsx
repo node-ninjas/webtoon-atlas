@@ -7,18 +7,24 @@ import {
     publishersType,
     artistsSchema,
     artistsType,
+    webtoonSchema,
+    webtoonType,
 } from '../types'
 
 type webtoonTypes = {
+    webtoons: webtoonType[]
     authors: authorsType
+    artists: artistsType
+    setWebtoons: React.Dispatch<React.SetStateAction<webtoonType[]>>
     publishers: publishersType
     setAuthors: React.Dispatch<React.SetStateAction<authorsType>>
     setPublishers: React.Dispatch<React.SetStateAction<publishersType>>
-    artists: artistsType
     setArtists: React.Dispatch<React.SetStateAction<artistsType>>
 }
 
 export const contextData: webtoonTypes = {
+    webtoons: [],
+    setWebtoons: () => {},
     authors: [],
     setAuthors: () => {},
     publishers: [],
@@ -37,6 +43,7 @@ export const WebtoonProvider: React.FC<ProviderProps> = ({ children }) => {
     const [authors, setAuthors] = useState<authorsType>([])
     const [publishers, setPublishers] = useState<publishersType>([])
     const [artists, setArtists] = useState<artistsType>([])
+    const [webtoons, setWebtoons] = useState<webtoonType[]>([] as webtoonType[])
 
     useEffect(() => {
         fetchSingleEndpoint('authors', authorSchema).then((data) =>
@@ -48,9 +55,14 @@ export const WebtoonProvider: React.FC<ProviderProps> = ({ children }) => {
         fetchSingleEndpoint('artists', artistsSchema).then((data) =>
             setArtists(data)
         )
+        fetchSingleEndpoint('webtoons', webtoonSchema).then((data) =>
+            setWebtoons((prevWebtoons) => [...prevWebtoons, data])
+        )
     }, [])
 
     const contextValue: webtoonTypes = {
+        webtoons,
+        setWebtoons,
         authors,
         setAuthors,
         publishers,
