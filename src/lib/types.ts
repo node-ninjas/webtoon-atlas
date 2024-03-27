@@ -1,4 +1,11 @@
 import { z } from 'zod'
+import {
+    statusArray,
+    typeArray,
+    priceValueRegex,
+    currencySymbolArray,
+    languageArray,
+} from '@/lib/variables'
 
 const profileSchema = z.object({
     name: z.string(),
@@ -16,16 +23,11 @@ const publishersSchema = z.array(
     })
 )
 
-const languageArray = ['German', 'Korean', 'Chinese', 'English'] as const
-
 const titleSchema = z.object({
     name: z.string(),
     language: z.string(z.enum(languageArray)),
 })
 
-const currencySymbolArray = ['€', '$', '₩'] as const
-
-const priceValueRegex = /^\d+,\d{2}$/
 const priceSchema = z.object({
     value: z.string().regex(priceValueRegex),
     currency: z.string(z.enum(currencySymbolArray)),
@@ -38,16 +40,6 @@ const sizeSchema = z.object({
     height: positiveNumberSchema,
     width: positiveNumberSchema,
 })
-
-const statusArray = [
-    'finished',
-    'running',
-    'onHiatus',
-    'aborted',
-    'announced',
-] as const
-
-const typeArray = ['manhwa', 'manhua', 'webtoon'] as const
 
 const isbnRegex = /^\d{13}$/
 
