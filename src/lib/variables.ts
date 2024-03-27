@@ -16,10 +16,13 @@ const currencySymbolArray = ['€', '$', '₩'] as const
 
 const languageArray = ['German', 'Korean', 'Chinese', 'English'] as const
 
+const isbnRegex = /^\d{13}$/
+
 export {
     statusArray,
     typeArray,
     priceValueRegex,
     currencySymbolArray,
     languageArray,
+    isbnRegex,
 }

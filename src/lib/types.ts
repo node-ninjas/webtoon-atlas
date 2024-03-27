@@ -5,6 +5,7 @@ import {
     priceValueRegex,
     currencySymbolArray,
     languageArray,
+    isbnRegex,
 } from '@/lib/variables'
 
 const profileSchema = z.object({
@@ -40,8 +41,6 @@ const sizeSchema = z.object({
     height: positiveNumberSchema,
     width: positiveNumberSchema,
 })
-
-const isbnRegex = /^\d{13}$/
 
 const webtoonSchema = z.object({
     titles: z.array(titleSchema),
